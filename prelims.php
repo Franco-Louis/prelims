@@ -53,15 +53,20 @@
 
             <br>
             <button class="btn btn-success" type="submit" name="btnGrades">Submit Grades</button>
-
-            <input type="hidden" name="first_name">
-            <input type="hidden" name="last_name">
-            <input type="hidden" name="age">
-            <input type="hidden" name="gender">
-            <input type="hidden" name="course">
-            <input type="hidden" name="email">
         </form>
 
+        <br>
+        <p style="font-size: 24px;">Student Details</p>
+        <p style="font-weight: bold;">First name: </p>
+        <p style="font-weight: bold;">Last name: </p>
+        <p style="font-weight: bold;">Age: </p>
+        <p style="font-weight: bold;">Gender: </p> 
+        <p style="font-weight: bold;">Email: </p>
+        <p style="font-size: 24px;">Grades</p> 
+        <p style="font-weight: bold;">Prelim: </p>
+        <p style="font-weight: bold;">Midterm: </p>
+        <p style="font-weight: bold;">Final: </p>
+        <p style="font-size: 24px;">Average Grade: </p>
     </div>
 </body>
 </html>
