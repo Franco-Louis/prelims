@@ -1,3 +1,30 @@
+<?php
+    $studentData = [];
+    $gradesData = [];
+    $showGradesForm = isset($_POST['btnStudent']);
+    $showStudentDetails = isset($_POST['btnGrades']);
+
+    if ($showGradesForm || $showStudentDetails) {
+        $studentData = [
+            'first_name' => $_POST['first_name'],
+            'last_name' => $_POST['last_name'],
+            'age' => $_POST['age'],
+            'gender' => $_POST['gender'],
+            'course' => $_POST['course'],
+            'email' => $_POST['email']
+        ];
+    }
+
+    if ($showStudentDetails) {
+        $gradesData = [
+            'prelim' => $_POST['prelim'],
+            'midterm' => $_POST['midterm'],
+            'final' => $_POST['final']
+        ];
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,64 +36,76 @@
 </head>
 <body>
     <br><h1 style="text-align: center;">Student Enrollment and Grade Processing System</h1><br>
-    <div class="container">
-        <p style="font-weight: bold;">Student Enrollment Form</p>
-        <form method="post">
-            <label for="first_name">First Name</label>
-            <input type="text" name="first_name" id="first_name" class="form-control" required>
-            
-            <label for="last_name">Last Name</label>
-            <input type="text" name="last_name" id="last_name" class="form-control" required>
+        <div class="container">
+        <?php if (!$showGradesForm): ?>
+            <p style="font-weight: bold;">Student Enrollment Form</p>
+            <form method="post">
+                <label for="first_name">First Name</label>
+                <input type="text" name="first_name" id="first_name" class="form-control" required>
+                
+                <label for="last_name">Last Name</label>
+                <input type="text" name="last_name" id="last_name" class="form-control" required>
 
-            <label for="age">Age</label>
-            <input type="number" name="age" id="age" class="form-control" required>
+                <label for="age">Age</label>
+                <input type="number" name="age" id="age" class="form-control" required>
 
-            <label for="gender">Gender</label><br>
-            <input type="radio" id="male" name="gender" value="male" required checked>
-            <label for="male">Male</label>
-            <input type="radio" id="female" name="gender" value="female" required>
-            <label for="female">Female</label>
+                <label for="gender">Gender</label><br>
+                <input type="radio" id="male" name="gender" value="male" required checked>
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="female" required>
+                <label for="female">Female</label>
 
+                <br>
+                <label for="course">Course</label>
+                <select name="course" id="course" class="form-select" required>
+                    <option value="BSIT" selected>BSIT</option>
+                    <option value="BSHRM">BSHRM</option>
+                    <option value="BSBA">BSBA</option>
+                </select>
+
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control" required><br>
+                <button class="btn btn-primary" type="submit" name='btnStudent'>Submit Student Information</button>
+            </form>
+        
+        <?php elseif ($showGradesForm): ?>
+            <p style="font-weight: bold;">Enter Grades for</p>
+            <form method="post">
+                <label for="prelim">Prelim</label>
+                <input type="number" name="prelim" id="prelim" class="form-control" required>
+
+                <label for="midterm">Midterm</label>
+                <input type="number" name="midterm" id="midterm" class="form-control" required>
+
+                <label for="final">Final</label>
+                <input type="number" name="final" id="final" class="form-control" required>
+
+                <br>
+                <button class="btn btn-success" type="submit" name="btnGrades">Submit Grades</button>
+
+                <input type="hidden" name="first_name" value="<?php echo $studentData['first_name']; ?>">
+                <input type="hidden" name="last_name" value="<?php echo $studentData['last_name']; ?>">
+                <input type="hidden" name="age" value="<?php echo $studentData['age']; ?>">
+                <input type="hidden" name="gender" value="<?php echo $studentData['gender']; ?>">
+                <input type="hidden" name="course" value="<?php echo $studentData['course']; ?>">
+                <input type="hidden" name="email" value="<?php echo $studentData['email']; ?>">
+            </form>
+        <?php endif; ?>
+
+        <?php if ($showStudentDetails): ?>
             <br>
-            <label for="course">Course</label>
-            <select name="course" id="course" class="form-select" required>
-                <option value="BSIT" selected>BSIT</option>
-                <option value="BSHRM">BSHRM</option>
-                <option value="BSBA">BSBA</option>
-            </select>
-
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" class="form-control" required><br>
-            <button class="btn btn-primary" type="submit" name='btnStudent'>Submit Student Information</button>
-        </form>
-
-        <p style="font-weight: bold;">Enter Grades for</p>
-        <form method="post">
-            <label for="prelim">Prelim</label>
-            <input type="number" name="prelim" id="prelim" class="form-control" required>
-
-            <label for="midterm">Midterm</label>
-            <input type="number" name="midterm" id="midterm" class="form-control" required>
-
-            <label for="final">Final</label>
-            <input type="number" name="final" id="final" class="form-control" required>
-
-            <br>
-            <button class="btn btn-success" type="submit" name="btnGrades">Submit Grades</button>
-        </form>
-
-        <br>
-        <p style="font-size: 24px;">Student Details</p>
-        <p style="font-weight: bold;">First name: </p>
-        <p style="font-weight: bold;">Last name: </p>
-        <p style="font-weight: bold;">Age: </p>
-        <p style="font-weight: bold;">Gender: </p> 
-        <p style="font-weight: bold;">Email: </p>
-        <p style="font-size: 24px;">Grades</p> 
-        <p style="font-weight: bold;">Prelim: </p>
-        <p style="font-weight: bold;">Midterm: </p>
-        <p style="font-weight: bold;">Final: </p>
-        <p style="font-size: 24px;">Average Grade: </p>
+            <p style="font-size: 24px;">Student Details</p>
+            <p style="font-weight: bold;">First name: </p>
+            <p style="font-weight: bold;">Last name: </p>
+            <p style="font-weight: bold;">Age: </p>
+            <p style="font-weight: bold;">Gender: </p> 
+            <p style="font-weight: bold;">Email: </p>
+            <p style="font-size: 24px;">Grades</p> 
+            <p style="font-weight: bold;">Prelim: </p>
+            <p style="font-weight: bold;">Midterm: </p>
+            <p style="font-weight: bold;">Final: </p>
+            <p style="font-size: 24px;">Average Grade: </p>
+        <?php endif; ?>
     </div>
 </body>
 </html>
