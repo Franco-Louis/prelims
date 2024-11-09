@@ -39,6 +39,29 @@
             <input type="email" name="email" id="email" class="form-control" required><br>
             <button class="btn btn-primary" type="submit" name='btnStudent'>Submit Student Information</button>
         </form>
+
+        <p style="font-weight: bold;">Enter Grades for</p>
+        <form method="post">
+            <label for="prelim">Prelim</label>
+            <input type="number" name="prelim" id="prelim" class="form-control" required>
+
+            <label for="midterm">Midterm</label>
+            <input type="number" name="midterm" id="midterm" class="form-control" required>
+
+            <label for="final">Final</label>
+            <input type="number" name="final" id="final" class="form-control" required>
+
+            <br>
+            <button class="btn btn-success" type="submit" name="btnGrades">Submit Grades</button>
+
+            <input type="hidden" name="first_name">
+            <input type="hidden" name="last_name">
+            <input type="hidden" name="age">
+            <input type="hidden" name="gender">
+            <input type="hidden" name="course">
+            <input type="hidden" name="email">
+        </form>
+
     </div>
 </body>
 </html>
