@@ -1,6 +1,4 @@
 <?php
-    $studentData = [];
-    $gradesData = [];
     $showGradesForm = isset($_POST['btnStudent']);
     $showStudentDetails = isset($_POST['btnGrades']);
 
@@ -94,17 +92,29 @@
 
         <?php if ($showStudentDetails): ?>
             <br>
-            <p style="font-size: 24px;">Student Details</p>
-            <p style="font-weight: bold;">First name: </p>
-            <p style="font-weight: bold;">Last name: </p>
-            <p style="font-weight: bold;">Age: </p>
-            <p style="font-weight: bold;">Gender: </p> 
-            <p style="font-weight: bold;">Email: </p>
-            <p style="font-size: 24px;">Grades</p> 
-            <p style="font-weight: bold;">Prelim: </p>
-            <p style="font-weight: bold;">Midterm: </p>
-            <p style="font-weight: bold;">Final: </p>
-            <p style="font-size: 24px;">Average Grade: </p>
+            <p style="font-size: 28px;">Student Details</p>
+            
+            <p><strong>First Name:</strong> <span style="font-weight: normal;"><?php echo $studentData['first_name']; ?></span></p>
+            <p><strong>Last Name:</strong> <span style="font-weight: normal;"><?php echo $studentData['last_name']; ?></span></p>
+            <p><strong>Age:</strong> <span style="font-weight: normal;"><?php echo $studentData['age']; ?></span></p>
+            <p><strong>Gender:</strong> <span style="font-weight: normal;"><?php echo $studentData['gender']; ?></span></p>
+            <p><strong>Email:</strong> <span style="font-weight: normal;"><?php echo $studentData['email']; ?></span></p>
+
+            <p style="font-size: 22px;">Grades</p>
+            <p><strong>Prelim:</strong> <span style="font-weight: normal;"><?php echo $gradesData['prelim']; ?></span></p>
+            <p><strong>Midterm:</strong> <span style="font-weight: normal;"><?php echo $gradesData['midterm']; ?></span></p>
+            <p><strong>Final:</strong> <span style="font-weight: normal;"><?php echo $gradesData['final']; ?></span></p>
+
+            <p style="font-size: 22px;">Average Grade:</p>
+            <?php 
+                $average = ($gradesData['prelim'] + $gradesData['midterm'] + $gradesData['final']) / 3;
+                $averageFormatted = number_format($average, 2);
+                if ($average > 74.99) {
+                    echo "<p>$averageFormatted - <span class='text-success'>Passed</span></p>"; 
+                } else {
+                    echo "<p>$averageFormatted - <span class='text-danger'>Failed</span></p>"; 
+                }
+            ?>
         <?php endif; ?>
     </div>
 </body>
